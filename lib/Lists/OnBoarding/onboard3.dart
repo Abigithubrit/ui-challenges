@@ -1,19 +1,21 @@
-import 'package:app/utils/SmallText.dart';
-import 'package:app/utils/apptext.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
-class Onboard3 extends StatefulWidget {
+import 'package:onboard/Homepage/home.dart';
+import 'package:onboard/widgets/largetext.dart';
+import 'package:onboard/widgets/next.dart';
+import 'package:onboard/widgets/smalltext.dart';
+class Onboard2 extends StatefulWidget {
    
 
   @override
-  State<Onboard3> createState() => _Onboard3State();
+  State<Onboard2> createState() => _Onboard2State();
 }
 
-class _Onboard3State extends State<Onboard3> {
+class _Onboard2State extends State<Onboard2> {
 List images=[
-    ['images/a.jfif','Lorem epsum Donor App \nis the finest app \nfor Colors beauty'],
-    ['images/ad.jfif','Lorem epsum Donor App \nis the finest app \nfor Colors beauty'],
-    ['images/ae.jfif','Lorem epsum Donor App \nis the finest app \nfor Colors beauty'],
+    ['images/a.jpg','Lorem epsum Donor App \nis the finest app \nfor Colors beauty'],
+    ['images/b.jpg','Lorem epsum Donor App \nis the finest app \nfor Colors beauty'],
+    ['images/c.jpg','Lorem epsum Donor App \nis the finest app \nfor Colors beauty'],
   
 
 
@@ -36,47 +38,28 @@ List images=[
           controller: _controller,
           itemBuilder: (context, index) {
             return Container(
-              color: Colors.blue,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                  Stack(
-                   children:[ Container(
+                   children:[
+                    Container(
                     height: MediaQuery.of(context).size.height,
-                    child: Image.asset('images/f.jfif',fit: BoxFit.contain,
-                    height: 300,),
+                    child: Image.asset(images[index][0],fit: BoxFit.fill,
+                    height: MediaQuery.of(context).size.height,),
                    ),
-                   Positioned(
-                  top: 20,
-                  left: 50,
-                  right: 50,
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    child: Container(
-                      child: Stack(
-                        children:[ ClipRRect(
-                          borderRadius: BorderRadius.circular(20),
-                          child: Image.asset(images[index][0],height: MediaQuery.of(context).size.height*0.8,fit: BoxFit.fill,
-                          width: double.infinity,),
-                        ),
-                        Positioned(
-                          bottom: 50,
-                          left: 50,
-                          child: Center(
-                            child: Column(mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                             ApText(size: 25, color:Colors.blue,text: images[index][1])
-                             
-                              ],
-                            ),
-                          ),
-                        )
-                   ]),
-                    ),
-                  )),
+                             Positioned(
+                              top: MediaQuery.of(context).size.height/2,
+                              left: MediaQuery.of(context).size.width/8,
+                             child: Text(images[index][1],
+                            textAlign: TextAlign.center,
+                            style: TextStyle(color: Colors.white,
+                            fontSize: 20),),
+                             )
+                 
                 ]),
+      
                  
 
                   
@@ -101,7 +84,9 @@ List images=[
             padding: const EdgeInsets.all(13.0),
             child: Align(
               alignment: Alignment.bottomLeft,
-              child: FlatButton(onPressed: (){},
+              child: ElevatedButton(onPressed: (){
+                next(context, Homepage());
+              },
                child: AppText(size: 20,text: 'Skip',)),
             ),
           ),
@@ -112,9 +97,10 @@ List images=[
               child: IconButton(onPressed: (){
                 if(_index!=2)
                 _controller.next();
-                else Navigator.pop(context);
+                else Navigator.push(context, MaterialPageRoute(builder: (context) => Homepage(),));
               },
-               icon: Icon(_index==2? Icons.check:Icons.arrow_forward))
+               icon: Icon(_index==2? Icons.check:Icons.arrow_forward,
+               color: Colors.white,))
             ),
           ),
         ],
